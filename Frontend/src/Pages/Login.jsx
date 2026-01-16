@@ -14,7 +14,7 @@ const Login = () => {
 
   const loginUser = async (formdata) => {
     const res = await axios.post(
-      "http://localhost:5000/api/v1/user/login",
+      "https://interview-prep-with-ai-fspi.onrender.com/api/v1/user/login",
       formdata,
       { withCredentials: true }
     );

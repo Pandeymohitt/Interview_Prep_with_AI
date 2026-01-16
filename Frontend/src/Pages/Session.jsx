@@ -11,7 +11,7 @@ const Session = () => {
 
   const getSession = async () => {
     const res = await axios.get(
-      "http://localhost:5000/api/v1/session/getMySession",
+      "https://interview-prep-with-ai-fspi.onrender.com/api/v1/session/getMySession",
       {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
@@ -27,7 +27,7 @@ const Session = () => {
 
   const deleteSessionApi = async (id) => {
     const res = await axios.delete(
-      `http://localhost:5000/api/v1/session/deleteMySession/${id}`,
+      `https://interview-prep-with-ai-fspi.onrender.com/api/v1/session/deleteMySession/${id}`,
       { withCredentials: true }
     );
     return res.data;
