@@ -1,27 +1,19 @@
 import ImageKit from "imagekit";
-import dotenv from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const publicKey = process.env.IMAGEKIT_PUBLIC_KEY;
+const privateKey = process.env.IMAGEKIT_PRIVATE_KEY;
+const urlEndpoint = process.env.URL_ENDPOINT;
 
-// ✅ Explicitly load Backend/.env
-dotenv.config({ path: path.join(__dirname, "../.env") });
+let imagekit = null;
 
-// 🔍 DEBUG
-console.log("IMAGEKIT ENV:", process.env.IMAGEKIT_PUBLIC_KEY);
-
-const { IMAGEKIT_PUBLIC_KEY, IMAGEKIT_PRIVATE_KEY, URL_ENDPOINT } = process.env;
-
-if (!IMAGEKIT_PUBLIC_KEY || !IMAGEKIT_PRIVATE_KEY || !URL_ENDPOINT) {
-  throw new Error("Missing ImageKit configuration");
+if (publicKey && privateKey && urlEndpoint) {
+  imagekit = new ImageKit({
+    publicKey,
+    privateKey,
+    urlEndpoint,
+  });
+} else {
+  console.log("⚠️ ImageKit keys missing, skipping ImageKit init");
 }
-
-const imagekit = new ImageKit({
-  publicKey: IMAGEKIT_PUBLIC_KEY,
-  privateKey: IMAGEKIT_PRIVATE_KEY,
-  urlEndpoint: URL_ENDPOINT,
-});
 
 export default imagekit;
